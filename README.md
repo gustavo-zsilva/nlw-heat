@@ -64,3 +64,25 @@
 - Primeiro parâmetro: Payload (informações do usuário)
 - Segundo parâmetro: Secret para validar se o token é válido
 - Terceiro parâmetro: Id do usuário
+
+> Sobrescrever tipagens do Express
+
+- Criando uma pasta ```@types/express``` e adicionando um index.d.ts, conseguimos adicionar tipagens às já existentes do Express.
+
+> Criar um middleware de autorização
+
+- Basicamente o que este middleware faz é dizer: "Se está cadastrado, continue e leve o Id do usuário na requisição. Se não, retorne um erro."
+
+> Terminada a parte de cadastramento de mensagens
+
+> Criação de WebSockets com Socket.IO
+
+- ```app.ts``` separado do servidor, que agora está em ```server.ts``` para organização
+- ```index.html``` criado para servir de 'fake front-end' para testar a conexão do socket
+
+> Relação dos controllers com rotas e serviços
+
+- Rota chama o controller apropriado
+- Controller chama o service
+- Service busca informação no banco de dados e retorna
+- Controller devolve o resultado do cálculo do service á api como JSON
