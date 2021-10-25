@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import io from 'socket.io-client'
 import { api } from '../../services/api'
 
 import logoImg from '../../assets/logo.svg'
 import styles from './styles.module.scss'
+import { AuthContext } from '../../contexts/auth'
 
 type Message = {
     id: string,
@@ -11,7 +12,8 @@ type Message = {
     user: {
         name: string,
         avatar_url: string,
-    }
+    },
+    belongsToUser: boolean,
 }
 
 const messagesQueue: Message[] = []
@@ -23,6 +25,7 @@ socket.on('new_message', (newMessage: Message) => {
 })
 
 export function MessageList() {
+    const { user } = useContext(AuthContext)
     const [messages, setMessages] = useState<Message[]>([])
 
     useEffect(() => {
@@ -37,11 +40,17 @@ export function MessageList() {
                 messagesQueue.shift()
             }
         }, 3000)
+
+        return () => clearInterval(timer)
     }, [])
 
     useEffect(() => {
         api.get<Message[]>('/messages/last3').then(response => {
-            setMessages(response.data)
+            const filteredMessages = response.data.map(message => ({
+                ...message,
+                belongsToUser: message.user.name === user?.name,
+            }))
+            setMessages(filteredMessages)
         })
     }, [])
 
@@ -52,13 +61,13 @@ export function MessageList() {
             <ul className={styles.messageList}>
                 {messages.map(message => {
                     return (
-                        <li key={message.id} className={styles.message}>
+                        <li key={message.id} className={`${styles.message} ${message.belongsToUser && styles.belongsToUser}`}>
                             <p className={styles.messageContent}>{message.text}</p>
                             <div className={styles.messageUser}>
                                 <div className={styles.userImage}>
-                                    <img src={message.user.avatar_url} alt="Diego Fernandes" />
+                                    <img src={message.user.avatar_url} alt={user?.name} />
                                 </div>
-                                <span>{message.user.name}</span>
+                                <a href={`https://github.com/${user?.login}`} target="_blank" rel="noopener noreferrer">{message.user.name}</a>
                             </div>
                         </li>
                     )

@@ -19,3 +19,20 @@
     right: -200px;
     top: 0;
 }
+
+@media screen and (max-width: 1200px) {
+    .contentWrapper {
+        margin: 0 2rem;
+    }
+}
+
+@media screen and (max-width: 930px) {
+    .contentWrapper {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .contentSigned::before {
+        
+    }
+}
