@@ -36,6 +36,7 @@ export function AuthProvider(props: AuthProvider) {
     const signInUrl = `https://github.com/login/oauth/authorize?scope=user&client_id=d8efb1d694b9d02cd85f`
 
     async function signIn(githubCode: string) {
+
         const response = await api.post<AuthResponse>('/authenticate', {
             code: githubCode,
         })
@@ -43,6 +44,8 @@ export function AuthProvider(props: AuthProvider) {
         const { token, user } = response.data
 
         localStorage.setItem('@dowhile:token', token)
+
+        api.defaults.headers.common.authorization = `Bearer ${token}`
 
         setUser(user)
     }
@@ -56,8 +59,6 @@ export function AuthProvider(props: AuthProvider) {
         const token = localStorage.getItem('@dowhile:token')
 
         if (token) {
-            api.defaults.headers.common.authorization = `Bearer ${token}`
-
             api.get<User>('/profile').then(response => {
                 setUser(response.data)
             })

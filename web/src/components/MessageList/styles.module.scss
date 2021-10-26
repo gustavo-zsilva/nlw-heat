@@ -5,6 +5,8 @@
     justify-content: space-between;
     align-items: flex-start;
 
+    position: relative;
+
     > img {
         height: 28px;
         margin: 32px 0;
@@ -21,9 +23,10 @@
 
     .message {
         max-width: 440px;
+        animation: 0.4s newMessage backwards;
 
         &:nth-child(2) {
-            margin-left: 80px;
+            transform: translateX(30%);
         }
 
         .messageContent {
@@ -71,5 +74,15 @@
         .userImage {
             border: 3px solid #e7007f;
         }
+    }
+}
+
+@keyframes newMessage {
+    from {
+        opacity: 0;
+        transform: translateY(-50%);
+    } to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
