@@ -86,3 +86,15 @@
         transform: translateY(0);
     }
 }
+
+@media screen and (max-width: 930px) {
+    .messageListWrapper {
+        align-items: center;
+    }
+
+    .message {
+        &:nth-child(2) {
+            transform: none;
+        }
+    }
+}

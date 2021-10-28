@@ -14,7 +14,6 @@ type Message = {
         name: string,
         avatar_url: string,
     },
-    belongsToUser: boolean,
 }
 
 const messagesQueue: Message[] = []
@@ -32,14 +31,8 @@ export function MessageList() {
     useEffect(() => {
         const timer = setInterval(() => {
             if (messagesQueue.length > 0) {
-                let lastMessage = messagesQueue[0]
-                lastMessage = {
-                    ...lastMessage,
-                    belongsToUser: lastMessage.user_id === user?.id,
-                }
-
                 setMessages(prevState => [
-                    lastMessage,
+                    messagesQueue[0],
                     prevState[0],
                     prevState[1],
                 ].filter(Boolean))
@@ -53,29 +46,9 @@ export function MessageList() {
 
     useEffect(() => {
         api.get<Message[]>('/messages/last3').then(response => {
-            const filteredMessages = filterUserMessages(response.data)
-            setMessages(filteredMessages)
+            setMessages(response.data)
         })
     }, [])
-
-    useEffect(() => {
-        console.log(user)
-        if (!user) return
-
-        const filteredMessages = filterUserMessages()
-        setMessages(filteredMessages)
-
-        return () => setMessages(messages.map(message => ({ ...message, belongsToUser: false })))
-    }, [user])
-
-    function filterUserMessages(optMessages: Message[] = messages) {
-        const filteredMessages = optMessages.map(message => ({
-            ...message,
-            belongsToUser: message.user_id === user?.id,
-        }))
-
-        return filteredMessages
-    }
 
     return (
         <div className={styles.messageListWrapper}>
@@ -84,7 +57,13 @@ export function MessageList() {
             <ul className={styles.messageList}>
                 {messages.map(message => {
                     return (
-                        <li key={message.id} className={`${styles.message} ${message.belongsToUser && styles.belongsToUser}`}>
+                        <li
+                            key={message.id}
+                            className={`
+                                ${styles.message}
+                                ${message.user_id === user?.id && styles.belongsToUser}
+                            `}
+                        >
                             <p className={styles.messageContent}>{message.text}</p>
                             <div className={styles.messageUser}>
                                 <div className={styles.userImage}>
