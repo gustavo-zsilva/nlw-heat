@@ -48,3 +48,10 @@
         margin-bottom: 1rem;
     }
 }
+
+@media screen and (max-width: 650px) {
+    .banner {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}

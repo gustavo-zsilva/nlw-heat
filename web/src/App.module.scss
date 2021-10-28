@@ -6,7 +6,6 @@
     grid-template-rows: 1fr 1fr;
     position: relative;
 
-
     .mainContent {
         display: grid;
         grid-template-columns: 1fr 453px;
@@ -16,6 +15,7 @@
 
     .sideContent {
         margin-top: 4rem;
+        height: 100vh;
 
         .message {
             display: flex;
@@ -36,6 +36,50 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 2rem;
+        }
+    }
+
+    .doWhile {
+        background: url('./assets/bg-hexagons.png') no-repeat;
+        background-size: cover;
+        
+        padding: 1rem;
+        height: 10rem;
+        margin-top: 10rem;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        strong {
+            font-size: 1.5rem;
+        }
+
+        .accessDoWhile {
+            background: var(--secondary);
+            border: 0;
+            
+            padding: 0 40px;
+            height: 56px;
+            color: #09090a;
+            font-size: 14px;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-decoration: none;
+    
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            cursor: pointer;
+    
+            svg {
+                margin-right: 16px;
+            }
+    
+            &:hover {
+                filter: brightness(0.9);
+            }
         }
     }
 }
@@ -61,5 +105,20 @@
     .contentWrapper {
         display: flex;
         flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .message {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+
+    .sideContent {
+        .banners {
+            display: flex;
+            flex-direction: column;
+        }
     }
 }
