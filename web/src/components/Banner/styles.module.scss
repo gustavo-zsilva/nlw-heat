@@ -1,0 +1,52 @@
+.banner {
+    padding: 1.2rem;
+    border: 1px solid var(--primary);
+    border-radius: .3rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .trailInfo {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+        strong {
+            font-size: 1.3rem;
+        }
+    }
+
+    .educatorInfo {
+        display: flex;
+        flex-direction: column;
+
+        .imageWrapper {
+            padding: 2px;
+            background: linear-gradient(100deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 50% 50% 50% .2rem;
+            line-height: 0;
+
+            img {
+                width: 7.5rem;
+                height: 7.5rem;
+                border-radius: 50%;
+                border: 6px solid var(--bg);
+            }
+        }
+
+        span {
+            margin-top: .8rem;
+            background: linear-gradient(100deg, var(--primary) 0%, var(--secondary) 70%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    }
+}
+
+@media screen and (max-width: 930px) {
+    .banner {
+        margin-bottom: 1rem;
+    }
+}

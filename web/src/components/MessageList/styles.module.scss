@@ -26,7 +26,7 @@
         animation: 0.4s newMessage backwards;
 
         &:nth-child(2) {
-            transform: translateX(30%);
+            margin-left: 80px;
         }
 
         .messageContent {
@@ -41,7 +41,7 @@
 
             .userImage {
                 padding: 2px;
-                background: linear-gradient(100deg, #ff008e 0%, #ffcd1e 100%);
+                background: linear-gradient(100deg, var(--primary) 0%, var(--secondary) 100%);
                 border-radius: 50%;
                 line-height: 0;
 
@@ -60,14 +60,14 @@
                 margin-left: 12px;
 
                 &:hover {
-                    color: #f0f0f0;
+                    color: var(--white);
                 }
             }
         }
     }
 
     .belongsToUser {
-        background: linear-gradient(100deg, #ff008e 0%, #ffcd1e 100%);
+        background: linear-gradient(100deg, var(--primary) 0%, var(--secondary) 100%);
         padding: .6rem .8rem;
         border-radius: 0 .8rem .8rem;
 
@@ -92,9 +92,11 @@
         align-items: center;
     }
 
+    .messageList {
+        margin-top: 2rem;
+    }
+
     .message {
-        &:nth-child(2) {
-            transform: none;
-        }
+        width: 100vw;
     }
 }

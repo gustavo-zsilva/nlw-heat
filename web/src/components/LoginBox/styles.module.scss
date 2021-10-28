@@ -17,7 +17,7 @@
     }
 
     .signInWithGithub {
-        background: #ffcd1e;
+        background: var(--secondary);
         margin-top: 32px;
         padding: 0 40px;
         height: 56px;
@@ -37,6 +37,25 @@
 
         &:hover {
             filter: brightness(0.9);
+        }
+    }
+}
+
+@media screen and (max-width: 930px) {
+    .loginBoxWrapper {
+        background: none;
+        height: fit-content;
+        
+        padding: 2rem;
+        flex-direction: row;
+
+        strong {
+            font-size: 1rem;
+            line-height: 1rem;
+        }
+
+        .signInWithGithub {
+            margin-top: 0;
         }
     }
 }
