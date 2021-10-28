@@ -15,44 +15,40 @@ const types = {
         name: 'NodeJS',
         educatorName: 'Dani',
         educatorPhoto: daniPhoto,
-        color: '#88BA3A',
         icon: <FaNodeJs color="#fff" size={32} />
     },
     reactNative: {
         name: 'React Native',
         educatorName: 'Rodrigão',
         educatorPhoto: rodrigoPhoto,
-        color: '#04A5CF',
         icon: <FaReact color="#fff" size={32} />
     },
     react: {
         name: 'ReactJS',
         educatorName: 'Diegão',
         educatorPhoto: diegoPhoto,
-        color: '#4AD5FE',
         icon: <FaReact color="#fff" size={32} />
     },
     elixir: {
         name: 'Elixir',
         educatorName: 'Rafa',
         educatorPhoto: rafaPhoto,
-        color: '#8C6FDD',
         icon: <SiElixir color="#fff" size={32} />
     }
 }
 
 type BannerProps = {
     type: keyof typeof types;
+    bgImage?: string,
 }
 
-export function Banner({ type }: BannerProps) {
+export function Banner({ type, bgImage }: BannerProps) {
     
     return (
         <div
             className={styles.banner}
             style={{
-                border: 0,
-                background: `linear-gradient(100deg, ${types[type].color} 0%, var(--bg) 100%)`,
+                backgroundImage: `url(${bgImage})`,
             }}
         >
             <div className={styles.trailInfo}>
@@ -62,7 +58,10 @@ export function Banner({ type }: BannerProps) {
 
             <div className={styles.educatorInfo}>
                 <div className={styles.imageWrapper}>
-                    <img src={types[type].educatorPhoto} alt={types[type].educatorName} />
+                    <img
+                        src={types[type].educatorPhoto}
+                        alt={types[type].educatorName}
+                    />
                 </div>
                 <span>com {''}
                     <strong>{types[type].educatorName}</strong>

@@ -2,18 +2,49 @@
     max-width: 1200px;
     height: 100vh;
     margin: 0 auto;
-
     display: grid;
-    grid-template-columns: 1fr 453px;
-    column-gap: 120px;
+    grid-template-rows: 1fr 1fr;
     position: relative;
+
+
+    .mainContent {
+        display: grid;
+        grid-template-columns: 1fr 453px;
+        column-gap: 120px;
+        height: 100vh;
+    }
+
+    .sideContent {
+        margin-top: 4rem;
+
+        .message {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4rem;
+        
+            strong {
+                font-size: 2.5rem;
+            }
+        
+            span {
+                font-size: 1.2rem;
+            }
+        }
+
+        .banners {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+    }
 }
 
 .contentSigned::before {
     content: '';
     height: 100vh;
     width: 420px;
-    background: url('./assets/background.svg') no-repeat;
+    background: url('./assets/background.svg') no-repeat ;
     background-size: cover;
     position: absolute;
     right: -200px;
@@ -30,9 +61,5 @@
     .contentWrapper {
         display: flex;
         flex-direction: column;
-    }
-
-    .contentSigned::before {
-        
     }
 }
