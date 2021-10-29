@@ -1,10 +1,14 @@
 import { useEffect, useState } from 'react'
+
 import io from 'socket.io-client'
 import { api } from '../../services/api'
+import { AxiosError } from 'axios'
 
 import logoImg from '../../assets/logo.svg'
-import styles from './styles.module.scss'
 import { useAuth } from '../../hooks/useAuth'
+
+import styles from './styles.module.scss'
+import { ErrorMessage } from '../ErrorMessage'
 
 type Message = {
     id: string,
@@ -26,6 +30,7 @@ socket.on('new_message', (newMessage: Message) => {
 
 export function MessageList() {
     const [messages, setMessages] = useState<Message[]>([])
+    const [error, setError] = useState(false)
     const { user } = useAuth()
 
     useEffect(() => {
@@ -47,6 +52,9 @@ export function MessageList() {
     useEffect(() => {
         api.get<Message[]>('/messages/last3').then(response => {
             setMessages(response.data)
+            setError(false)
+        }).catch(() => {
+            setError(true)
         })
     }, [])
 
@@ -55,7 +63,7 @@ export function MessageList() {
             <img src={logoImg} alt="DoWhile 2021" />
 
             <ul className={styles.messageList}>
-                {messages.map(message => {
+                {!error ? messages.map(message => {
                     return (
                         <li
                             key={message.id}
@@ -79,7 +87,7 @@ export function MessageList() {
                             </div>
                         </li>
                     )
-                })}
+                }) : <ErrorMessage />}
             </ul>
         </div>
     )
