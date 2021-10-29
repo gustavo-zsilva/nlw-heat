@@ -7,9 +7,15 @@
 
     position: relative;
 
-    > img {
-        height: 28px;
-        margin: 32px 0;
+    .header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin: 2rem 0;
+
+        > img {
+            height: 28px;
+        }
     }
 }
 

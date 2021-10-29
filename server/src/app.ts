@@ -20,6 +20,12 @@ const io = new Server(serverHttp, {
 
 io.on("connection", socket => {
     console.log(`Usuário conectado no socket ${socket.id}`)
+    
+    io.emit('clients', io.engine.clientsCount)
+
+    socket.on('disconnect', () => {
+        socket.broadcast.emit('clients', io.engine.clientsCount)
+    })
 })
 
 app.use(express.json())

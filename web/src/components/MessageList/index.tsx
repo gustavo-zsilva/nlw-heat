@@ -9,6 +9,7 @@ import { useAuth } from '../../hooks/useAuth'
 
 import styles from './styles.module.scss'
 import { ErrorMessage } from '../ErrorMessage'
+import { ConnectedUsers } from '../ConnectedUsers'
 
 type Message = {
     id: string,
@@ -60,7 +61,10 @@ export function MessageList() {
 
     return (
         <div className={styles.messageListWrapper}>
-            <img src={logoImg} alt="DoWhile 2021" />
+            <div className={styles.header}>
+                <img src={logoImg} alt="DoWhile 2021" />
+                <ConnectedUsers />
+            </div>
 
             <ul className={styles.messageList}>
                 {!error ? messages.map(message => {
