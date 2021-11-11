@@ -1,7 +1,7 @@
 # nlw-heat
 ## NLW Heat is the Rocketseat event for heating up to DoWhile2021.
 
-### This project is a website that gives you everything you need to get prepared for DoWhile this year.
+> This project is a website that gives you everything you need to get prepared for DoWhile this year.
 
 ## Technologies
 
